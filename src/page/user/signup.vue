@@ -1,21 +1,13 @@
 <template>
     <div style="padding-top: 30px">
       <group>
-        <x-input title="用户名" name="username" placeholder="请输入姓名" ></x-input>
-      </group>
-
-      <group>
-        <x-input title="请输入密码" type="password" placeholder="请输入密码" v-model="password" :min="6" :max="6" @on-change="change"></x-input>
+        <x-input title="用户名" name="username" v-model="username" placeholder="请输入姓名" ></x-input>
+        <x-input title="请输入密码" type="password" placeholder="请输入密码" v-model="password" :min="6" :max="6" ></x-input>
         <x-input title="请确认密码" v-model="password2" type="password" placeholder="请再次输入密码" :equal-with="password"></x-input>
-      </group>
-
-      <group>
-        <x-input title="邮箱" name="email" placeholder="请输入邮箱地址" is-type="email"></x-input>
+        <x-input title="邮箱" v-model="email" name="email" placeholder="请输入邮箱地址" is-type="email"></x-input>
       </group>
       <div  style="margin-top: 10px">
-        <box gap="10px 10px">
-          <x-button :gradients="['#1D62F0', '#19D5FD']">注册</x-button>
-        </box>
+        <el-button type="primary" v-on:click="userSignUp(username,password,password2,email)">注册</el-button>
       </div>
 
     </div>
@@ -33,54 +25,56 @@ export default {
   },
   data () {
     return {
+      username: '',
       password: '',
-      password2: ''
-      // enterText: '',
-      // valid1: false,
-      // valid2: false,
-      // iconType: '',
-      // be2333: function (value) {
-      //   return {
-      //     valid: value === '2333',
-      //     msg: 'Must be 2333'
-      //   }
-      // },
-      // style: '',
-      // disabledValue: 'hello',
-      // debounceValue: '',
-      // maxValue: '',
-      // maskValue: '13545678910',
-      // maskValue2: ''
+      password2: '',
+      email: ''
     }
   },
   methods: {
-    // getValid1 () {
-    //   this.valid1 = this.$refs.input01.valid
-    // },
-    // getValid2 () {
-    //   this.valid2 = this.$refs.input02.valid
-    // },
-    // change (val) {
-    //   console.log('on change', val)
-    // },
-    // onBlur (val) {
-    //   console.log('on blur', val)
-    // },
-    // onFocus (val, $event) {
-    //   console.log('on focus', val, $event)
-    // },
-    // onEnter (val) {
-    //   console.log('click enter!', val)
-    // }
+    alert () {
+      this.$message({
+        message: '两次填写密码不一致',
+        type: 'warning'
+      })
+    },
+    userSignUp: function (uname, pword, pword2, email) {
+      console.log(uname, pword, pword2, email)
+      if (uname === '' || pword === '' || pword2 === '' || email === '') {
+        this.$message({
+          message: '不允许有空项',
+          type: 'warning'
+        })
+      } else if (pword !== pword2) {
+        this.alert()
+      } else {
+        let data = {
+          name: uname,
+          password: pword,
+          email: email
+        }
+        this.$http.post('/local/admin/Login/signUp', data)
+          .then((res) => {
+            console.log(res.data)
+            if (res.data.flag === 'Success') {
+              this.$message({
+                message: '恭喜你，注册成功',
+                type: 'success'
+              })
+            } else if (res.data.msg === '用户名已存在') {
+              this.$message.error('用户名已存在，请重填')
+            } else if (res.data.msg === '邮箱已注册') {
+              this.$message.error('邮箱已注册，请重填')
+            }
+          }, (err) => {
+            console.log(err)
+          })
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
-  .red {
-    color: red;
-  }
-  .green {
-    color: green;
-  }
+
 </style>

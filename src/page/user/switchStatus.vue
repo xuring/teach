@@ -25,14 +25,14 @@ export default {
     signOnClick: function () {
       this.isActiveOne = true
       this.isActiveTwo = false
-      console.log(this.isActiveOne)
-      console.log(this.isActiveTwo)
+      // console.log(this.isActiveOne)
+      // console.log(this.isActiveTwo)
     },
     signUpClick: function () {
       this.isActiveOne = false
       this.isActiveTwo = true
-      console.log(this.isActiveOne)
-      console.log(this.isActiveTwo)
+      // console.log(this.isActiveOne)
+      // console.log(this.isActiveTwo)
     }
   }
 }

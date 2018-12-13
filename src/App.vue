@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import Bottom from "./page/bottom";
+// import Bottom from "./page/bottom";
 export default {
-  name: 'App',
-  components: {Bottom}
+  name: 'App'
+  // components: {Bottom}
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="foot">
     <tabbar  >
-      <tabbar-item   link="/" >
+      <tabbar-item   link="/Home" >
         <img slot="icon" src="../../assets/images/首页-dh.png">
         <span class="bottomText" slot="label" style="text-decoration: none;">首页</span>
       </tabbar-item>

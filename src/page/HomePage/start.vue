@@ -10,7 +10,7 @@
       </div>
       <div style="margin-top: 10px">
         <img src="../../assets/images/开始1.png" style="width: 20%;height: 20%;"><br>
-        <router-link :to="{path:'teachingProcess'}">
+        <router-link :to="{path:'teachDesign'}">
           <button class="start">开始阅读</button>
         </router-link>
       </div>

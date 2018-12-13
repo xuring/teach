@@ -21,6 +21,18 @@ function resolve (dir) {
 //   }
 // })
 
+const webpack = require('webpack')
+module.exports = {
+  configureWebpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery"
+      })
+    ]
+  }
+}
+
 const webpackConfig = {
   context: path.resolve(__dirname, '../'),
   entry: {

@@ -17,7 +17,14 @@ import ImgSwiper from './imgSwiper'
 
 export default {
   name: 'Home',
-  components: {ImgSwiper, Start, TopText, Bottom, Photo}
+  components: {ImgSwiper, Start, TopText, Bottom, Photo},
+  methods: {
+
+  },
+  mounted () {
+    console.log(this.$route.query.user)
+    console.log(sessionStorage.getItem('user'))
+  }
 }
 </script>
 

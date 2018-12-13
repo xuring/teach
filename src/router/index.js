@@ -9,21 +9,22 @@ import Home from '@/page/HomePage/Home'
 // import bottom from '@/page/bottom'
 import userLog from '@/page/user/userLog'
 import personal from '@/page/PersonalCenter/personal'
+import editPassword from '@/page/PersonalCenter/editPassword'
 import study from '@/page/StudyCenter/study'
 import accountMangement from '@/page/PersonalCenter/accountMangement'
-import teachingProcess from '@/page/design/teachingProcess'
+import teachDesign from '@/page/design/teachDesign'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/Home',
       name: 'Home',
       component: Home
     },
     {
-      path: '/userLog',
+      path: '/',
       name: 'userLog',
       component: userLog
     },
@@ -57,20 +58,20 @@ export default new Router({
       name: 'personal',
       component: personal
     },
-    // {
-    //   path: '/',
-    //   name: 'bottom',
-    //   component: bottom
-    // },
+    {
+      path: '/editPassword',
+      name: 'editPassword',
+      component: editPassword
+    },
     {
       path: '/accountMangement',
       name: 'accountMangement',
       component: accountMangement
     },
     {
-      path: '/teachingProcess',
-      name: 'teachingProcess',
-      component: teachingProcess
+      path: '/teachDesign',
+      name: 'teachDesign',
+      component: teachDesign
     }
   ]
 })
