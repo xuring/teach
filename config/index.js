@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/local': {
-        target: 'http://127.0.0.1/teachDesign/public/index.php',
+        target: 'http://127.0.0.1/teachDesignAPI/public/index.php',
         logLevel: 'debug',
         changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
         pathRewrite: {

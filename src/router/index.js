@@ -13,6 +13,7 @@ import editPassword from '@/page/PersonalCenter/editPassword'
 import study from '@/page/StudyCenter/study'
 import accountMangement from '@/page/PersonalCenter/accountMangement'
 import teachDesign from '@/page/design/teachDesign'
+import activitySelect from '@/page/design/activitySelect'
 
 Vue.use(Router)
 
@@ -72,6 +73,11 @@ export default new Router({
       path: '/teachDesign',
       name: 'teachDesign',
       component: teachDesign
+    },
+    {
+      path: '/activitySelect',
+      name: 'activitySelect',
+      component: activitySelect
     }
   ]
 })

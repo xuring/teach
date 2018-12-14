@@ -7,8 +7,11 @@
       <div class="panel-body">
         <div class="checkbox">
           <label><input type="checkbox" v-model="editable">是否拖拽</label>
-          <button type="button" class="btn btn-default" @click="orderList" style="padding:2px 5px">还原排序</button>
-          <button type="button" class="btn btn-primary"  style="padding:2px 5px" @click="send">点击确定</button>
+          <button v-show="order" type="button" class="btn btn-default" @click="orderListOne" style="padding:2px 5px">还原排序</button>
+          <button v-show="!order" type="button" class="btn btn-default" @click="orderListTwo" style="padding:2px 5px">还原排序</button>
+          <router-link :to="{ name:'activitySelect', query:{ teachList: list2}}">
+            <button type="button" class="btn btn-primary"  style="padding:2px 5px" @click="send">点击确定</button>
+          </router-link>
         </div>
 
       </div>
@@ -22,7 +25,8 @@
           <option value="English">英语</option>
         </select>
         <div v-show="kindOne"  style="background-color: #DBDBDB;height: auto;padding-bottom: 20px;padding-top: 20px;padding-left:0px;padding-right: 0px ;margin-top: 3px">
-          <draggable class="list-group" element="ul" v-model="read" :options="dragOptions" :move="onMove" @start="isDragging=true" @end="isDragging=false">
+          <draggable class="list-group" element="ul" v-model="read" :options="dragOptions"  :move="onMove" @start="isDragging=true" @end="isDragging=false">
+            <!--:options="{group:'teach',pull:'clone',put:'false'}"-->
             <transition-group type="transition" :name="'flip-list'">
               <li class="list-group-item" v-for="element in read" :key="element.order">
                 <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
@@ -49,7 +53,8 @@
       <div class="col-6" style="float: right;">
         <p><i class="icon-xuanze1" style="color: #3499FE"></i>拖放区域</p>
         <div style="background-color: yellow;height: auto;padding-bottom: 20px;padding-top: 20px;">
-          <draggable element="span" v-model="list2" :options="dragOptions" :move="onMove">
+          <draggable element="span" v-model="list2"  :options="dragOptions" :move="onMove">
+            <!--:options="{group:'teach'}"-->
             <transition-group name="no" class="list-group" tag="ul">
               <li class="list-group-item" v-for="element in list2" :key="element.order">
                 <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
@@ -120,12 +125,18 @@ export default {
       dialogVisible: false,
       studyKind: '',
       kindOne: false,
-      kindTwo: false
+      kindTwo: false,
+      order: true
     }
   },
   methods: {
-    orderList () {
-      this.list = this.list.sort((one, two) => {
+    orderListOne () {
+      this.read = this.read.sort((one, two) => {
+        return one.order - two.order
+      })
+    },
+    orderListTwo () {
+      this.english = this.english.sort((one, two) => {
         return one.order - two.order
       })
     },
@@ -136,6 +147,11 @@ export default {
         (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
       )
     },
+    // onClone: function (evt) {
+    //   var origEl = evt.item
+    //   var cloneEl = evt.clone
+    //   // return cloneEl
+    // },
     send: function () {
       if (this.list2.length === 0) {
         console.log('123')
@@ -147,9 +163,11 @@ export default {
       if (val === 'read') {
         this.kindOne = true
         this.kindTwo = false
+        this.order = true
       } else if (val === 'English') {
         this.kindOne = false
         this.kindTwo = true
+        this.order = false
       }
     }
   },
